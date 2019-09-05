@@ -35,7 +35,7 @@
         function advance() {
           $('#progressBar').css('width', Math.floor(elapsed/eventDuration*100)+'%').html(Math.floor(elapsed * 60) + " / " + Math.floor(eventDuration * 60));
           if(elapsed >= eventDuration) {
-            new YT.Player('youtubeEmbed', {
+            player = new YT.Player('youtubeEmbed', {
               height: '390',
               width: '640',
               videoId: $('#youtubeLink').val(),
