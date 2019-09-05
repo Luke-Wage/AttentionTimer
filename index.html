@@ -28,7 +28,8 @@
           if(max < min) {
             alert('Duration min must be less than max.')
           } else {
-            $('#live, #mainForm').toggle();
+            $('#live').show();
+            $('#mainForm').children().hide();
             audio = new Audio($('#soundLink').val());
             $('#youtubeEmbed').hide();
             advance();
@@ -76,13 +77,13 @@
 
         function endEvent() {
           $('#live').hide();
-          $('#mainForm').show();
+          $('#mainForm').children().show();
           if(timer) {
             clearTimeout(timer);
           }
           player.setSize(300, 150);
           player.stopVideo();
-          $('#youtubeEmbed').css('position','unset').css('top', 'unset').css('left', 'unset').appendTo('#youtubeBlock');
+          $('#youtubeEmbed').css('position','unset').css('top', 'unset').css('left', 'unset');
         }
         player = null;
         $('#youtubeLink').change(function(){
@@ -142,11 +143,13 @@
           <br><input type="button" class="btn btn-link" id="resetSound" value="Reset Sound">
           <br><input class="form-control" id="soundLink" type="text" required value="https://freesound.org/data/previews/91/91926_7037-lq.mp3">
         </div>
-        <div class="col-md-6 mb-3" id="youtubeBlock">
+        <div class="col-md-6 mb-3">
           <label for="youtubeLink">Youtube Video Code:</label>
           <br>
           https://www.youtube.com/watch?v=<input class="form-control" id="youtubeLink" type="text" required pattern="[a-zA-Z0-9_-]+" placeholder="e.g. VNgpHTbpNkg">
           <br>Once video loads, press play button and then pause to enable autoplay.
+        </div>
+        <div class="col-md-6 mb-3">
           <div id="youtubeEmbed">
           </div>
         </div>
