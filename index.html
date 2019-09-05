@@ -27,6 +27,7 @@
           } else {
             $('#live, #mainForm').toggle();
             audio = new Audio($('#soundLink').val());
+            $('#youtubeEmbed').hide();
             advance();
           }
         });
@@ -44,7 +45,21 @@
             //} else {
             //  window.open('//www.youtube.com/embed/'+$('#youtubeLink').val()+'?rel=0&autoplay=1');
             //}
-            player.playVideoAt(0);
+            $('#youtubeEmbed').show();
+            player.seekTo(0);
+            player.playVideo();
+            try {
+              var el = $('#youtubeEmbed');
+              if (el.requestFullScreen) {
+                el.requestFullScreen();
+              } else if (el.mozRequestFullScreen) {
+                el.mozRequestFullScreen();
+              } else if (el.webkitRequestFullScreen) {
+                el.webkitRequestFullScreen();
+              }
+            } catch (e) {
+              console.log(e);
+            }
             return;
           }
           if (elapsed > 0) {
@@ -73,6 +88,7 @@
         }
         player = null;
         $('#youtubeLink').change(function(){
+          $('#youtubeEmbed').show();
           if(player != null) {
             player.destroy();
           }
