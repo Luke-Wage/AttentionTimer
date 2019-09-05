@@ -81,6 +81,7 @@
           }
           player.setSize(300, 150);
           player.stopVideo();
+          $('#youtubeBlock').hide();
           $('#youtubeEmbed').css('position','unset').css('top', 'unset').css('left', 'unset');
         }
         player = null;
@@ -104,7 +105,6 @@
               events : {
                 'onStateChange' : function(){
                   if(player.getPlayerState() == 0) {
-                    $('#youtubeBlock').hide();
                     endEvent();
                   } 
                 }
