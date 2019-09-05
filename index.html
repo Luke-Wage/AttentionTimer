@@ -95,7 +95,7 @@
               },
               events : {
                 'onStateChange' : function(){
-                  if(player.getPlayerState() != 1 && player.getPlayerState() != 3 && player.getPlayerState() != -1) {
+                  if(player.getPlayerState() == 0) {
                     $('#youtubeEmbed').hide();
                   } 
                 }
