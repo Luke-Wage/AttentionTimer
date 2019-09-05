@@ -76,7 +76,12 @@
           if(player != null) {
             player.destroy();
           }
-          player = new YT.Player('youtubeEmbed', {
+          loadYoutubePlayer();
+        });
+        
+        function loadYoutubePlayer(){
+          if(YT.loaded) {
+            player = new YT.Player('youtubeEmbed', {
               height: '150',
               width: '300',
               videoId: $('#youtubeLink').val(),
@@ -84,7 +89,10 @@
                 rel: 0
               }
             });
-        });
+          } else {
+            setTimeout(loadYoutubePlayer, 500);
+          }
+        }
         
         var all_cookies = $.cookie();
         $.each(all_cookies, function (key, value) {
