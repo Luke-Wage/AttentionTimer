@@ -49,7 +49,7 @@
             player.seekTo(0);
             player.playVideo();
             try {
-              var el = $('#youtubeEmbed');
+              var el = $('#youtubeEmbed')[0];
               if (el.requestFullScreen) {
                 el.requestFullScreen();
               } else if (el.mozRequestFullScreen) {
