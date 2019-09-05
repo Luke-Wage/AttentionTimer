@@ -48,19 +48,7 @@
             $('#youtubeEmbed').show();
             player.seekTo(0);
             player.playVideo();
-            try {
-              var el = $('#youtubeEmbed')[0];
-              if (el.requestFullScreen) {
-                el.requestFullScreen();
-              } else if (el.mozRequestFullScreen) {
-                el.mozRequestFullScreen();
-              } else if (el.webkitRequestFullScreen) {
-                el.webkitRequestFullScreen();
-              }
-            } catch (e) {
-              console.log(e);
-            }
-            hidePlayerWhenStopped();
+
             return;
           }
           if (elapsed > 0) {
@@ -107,7 +95,7 @@
               },
               events : {
                 'onStateChange' : function(){
-                  if(player.getPlayerState() != 1 && player.getPlayerState() != 3) {
+                  if(player.getPlayerState() != 1 && player.getPlayerState() != 3 && player.getPlayerState() != -1) {
                     $('#youtubeEmbed').hide();
                   } 
                 }
