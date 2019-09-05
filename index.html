@@ -7,6 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
       $(function(){
         $('input').change(function(){
@@ -34,15 +35,25 @@
         function advance() {
           $('#progressBar').css('width', Math.floor(elapsed/eventDuration*100)+'%').html(Math.floor(elapsed * 60) + " / " + Math.floor(eventDuration * 60));
           if(elapsed >= eventDuration) {
+            new YT.Player('player', {
+              height: '390',
+              width: '640',
+              videoId: $('#youtubeLink').val(),
+              events: {
+                'onReady': function(event){
+                  event.target.playVideo();
+                }
+              }
+            });
             //var iframe = $('<iframe src="//www.youtube.com/embed/'+$('#youtubeLink').val()+'?rel=0&autoplay=1" allow="autoplay; encrypted-media" frameborder="0" allowfullscreen></iframe>');
             //$('#youtubeEmbed').append(iframe);
             //iframe[0].requestFullscreen();
             
-            if((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)){
-              window.location = 'intent://'+$('#youtubeLink').val()+'/Intent;scheme=vnd.youtube;package=com.google.android.youtube;S.browser_fallback_url=market://details?id=com.google.android.youtube;end;';
-            } else {
-              window.open('//www.youtube.com/embed/'+$('#youtubeLink').val()+'?rel=0&autoplay=1');
-            }
+            //if((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)){
+//              window.location = 'intent://'+$('#youtubeLink').val()+'/Intent;scheme=vnd.youtube;package=com.google.android.youtube;S.browser_fallback_url=market://details?id=com.google.android.youtube;end;';
+  //          } else {
+    //          window.open('//www.youtube.com/embed/'+$('#youtubeLink').val()+'?rel=0&autoplay=1');
+      //      }
             return;
           }
           if (elapsed > 0) {
