@@ -127,27 +127,31 @@
       <form id="mainForm">
         <div class="col-md-6 mb-3">
           <label for="eventDuration" class="text-primary">Event Duration:</label><br>
-          <input class="form-control range" id="eventDuration" type="range" min=".25" max="20" value="1" step=".25"><span>1</span>
+          <input class="form-control range ml-3" id="eventDuration" type="range" min=".25" max="20" value="1" step=".25"><span>1</span>
           Minutes
         </div>
         <div class="col-md-6 mb-3">
           <span class="text-primary">Minutes between sounds:</span>
-          <br>
-          <label for="min">Min</label><input id="min" class="range form-control" type="range" min="0" max="10" step=".25" value=".75"><span>.75</span>
-          <br> Max<input id="max" class="range form-control" type="range" min=".25" max="10" step=".25" value="4"><span>4</span>
+          <div class="ml-3">
+            <label for="min">Min</label><input id="min" class="range form-control" type="range" min="0" max="10" step=".25" value=".75"><span>.75</span>
+            <br> Max<input id="max" class="range form-control" type="range" min=".25" max="10" step=".25" value="4"><span>4</span>
+          </div>
         </div>
         <div class="col-md-6 mb-3">
           <label for="soundLink" class="text-primary">Sound URL:</label>
-          <br><input type="button" class="btn btn-link text-muted" id="resetSound" value="Reset Sound">
-          <br><input class="form-control" id="soundLink" type="text" required value="https://freesound.org/data/previews/91/91926_7037-lq.mp3">
+          <div class="ml-3">
+            <input type="button" class="btn btn-link text-muted" id="resetSound" value="Reset Sound">
+            <br><input class="form-control" id="soundLink" type="text" required value="https://freesound.org/data/previews/91/91926_7037-lq.mp3">
+          </div>
         </div>
         <div class="col-md-6 mb-3">
           <label for="youtubeLink" class="text-primary">Youtube Video Code:</label>
-          <br>
-          https://www.youtube.com/watch?v=<input class="form-control" id="youtubeLink" type="text" required pattern="[a-zA-Z0-9_-]+" placeholder="e.g. VNgpHTbpNkg">
-          <br><span class="text-muted">Once video loads, press play button and then pause to enable autoplay.</span>
+          <div class="ml-3">
+            https://www.youtube.com/watch?v=<input class="form-control" id="youtubeLink" type="text" required pattern="[a-zA-Z0-9_-]+" placeholder="e.g. VNgpHTbpNkg">
+            <br><span class="text-muted">Once video loads, press play button and then pause to enable autoplay.</span>
+          </div>
         </div>
-        <div class="col-md-6 mb-3" id="youtubeBlock">
+        <div class="col-md-6 mb-3 ml-3" id="youtubeBlock">
           <div id="youtubeEmbed">
           </div>
         </div>
