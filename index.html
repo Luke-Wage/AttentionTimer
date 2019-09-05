@@ -30,7 +30,9 @@
         function advance() {
           $('#progressBar').css('width', Math.floor(elapsed/eventDuration*100)+'%').html(Math.floor(elapsed * 60) + " / " + Math.floor(eventDuration * 60));
           if(elapsed >= eventDuration) {
-            $('#youtubeEmbed').html('<iframe src="//www.youtube.com/embed/'+$('#youtubeLink').val()+'?rel=0&autoplay=1" allow="autoplay; encrypted-media" frameborder="0" allowfullscreen></iframe>');
+            var iframe = $('<iframe src="//www.youtube.com/embed/'+$('#youtubeLink').val()+'?rel=0&autoplay=1" allow="autoplay; encrypted-media" frameborder="0" allowfullscreen></iframe>');
+            $('#youtubeEmbed').append(iframe);
+            iframe[0].requestFullscreen();
             return;
           }
           if (elapsed > 0) {
@@ -54,7 +56,7 @@
         }
 
         function endEvent() {
-          $('#youtubeEmbed').html('');
+          $('#youtubeEmbed').empty();
           $('#live, #mainForm').toggle();
           clearTimeout(timer);
         }
