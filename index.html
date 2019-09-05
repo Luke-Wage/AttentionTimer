@@ -16,6 +16,9 @@
         $(document).on('input change', '.range', function() {
           $(this).next('span').html(this.value);
         });
+        $('#resetSound').click(function(){
+          $('#soundLink').val('https://freesound.org/data/previews/91/91926_7037-lq.mp3').change();
+        });
         $('#mainForm').submit(function(event) {
           event.preventDefault();
           elapsed = 0;
@@ -45,7 +48,7 @@
             //} else {
             //  window.open('//www.youtube.com/embed/'+$('#youtubeLink').val()+'?rel=0&autoplay=1');
             //}
-            $('#youtubeEmbed').show().css('position','fixed').css('top', '0').css('left', '0');;
+            $('#youtubeEmbed').show().css('position','fixed').css('top', '0').css('left', '0').appendTo('body');
             player.seekTo(0);
             player.playVideo();
             player.setSize(window.innerWidth, window.innerHeight);
@@ -79,7 +82,7 @@
           }
           player.setSize(300, 150);
           player.stopVideo();
-          $('#youtubeEmbed').css('position','unset').css('top', 'unset').css('left', 'unset');
+          $('#youtubeEmbed').css('position','unset').css('top', 'unset').css('left', 'unset').appendTo('#youtubeBlock');
         }
         player = null;
         $('#youtubeLink').change(function(){
@@ -135,11 +138,11 @@
           <br> Max<input id="max" class="range form-control" type="range" min=".25" max="10" step=".25" value="4"><span>4</span>
         </div>
         <div class="col-md-6 mb-3">
-          <label for="soundLink">Sound URL:</label>
+          <label for="soundLink">Sound URL:</label><input type="button" class="btn btn-sm" id="resetSound" value="Reset Sound">
           <br>
           <input class="form-control" id="soundLink" type="text" required value="https://freesound.org/data/previews/91/91926_7037-lq.mp3">
         </div>
-        <div class="col-md-6 mb-3">
+        <div class="col-md-6 mb-3" id="youtubeBlock">
           <label for="youtubeLink">Youtube Video Code:</label>
           <br>
           https://www.youtube.com/watch?v=<input class="form-control" id="youtubeLink" type="text" required pattern="[a-zA-Z0-9_-]+" placeholder="e.g. VNgpHTbpNkg">
