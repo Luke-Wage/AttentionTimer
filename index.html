@@ -143,6 +143,9 @@
           <label for="youtubeLink">Youtube Video Code:</label>
           <br>
           https://www.youtube.com/watch?v=<input class="form-control" id="youtubeLink" type="text" required pattern="[a-zA-Z0-9_-]+" placeholder="e.g. VNgpHTbpNkg">
+          <br>Once video loads, press play button and then pause to enable autoplay.
+          <div id="youtubeEmbed">
+          </div>
         </div>
         <div class="col-md-6 mb-3">
           <input class="btn btn-primary btn-lg btn-block" type="submit" value="Go">
@@ -153,8 +156,6 @@
         <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
           <input class="btn btn-primary btn-lg btn-block" id="stop" type="button" value="Reset">
-      </div>
-      <div id="youtubeEmbed">
       </div>
     </div>
   </body>
