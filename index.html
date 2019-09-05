@@ -45,10 +45,10 @@
             //} else {
             //  window.open('//www.youtube.com/embed/'+$('#youtubeLink').val()+'?rel=0&autoplay=1');
             //}
-            $('#youtubeEmbed').show();
+            $('#youtubeEmbed').show().css('position','fixed !important').css('top', '0');
             player.seekTo(0);
             player.playVideo();
-
+            player.setSize(window.insideWidth, window.insideHeight);
             return;
           }
           if (elapsed > 0) {
@@ -74,6 +74,7 @@
         function endEvent() {
           $('#live, #mainForm').toggle();
           clearTimeout(timer);
+          player.setSize(300, 150);
         }
         player = null;
         $('#youtubeLink').change(function(){
@@ -147,7 +148,7 @@
       </div>
           <input class="btn btn-primary btn-lg btn-block" id="stop" type="button" value="Reset">
       </div>
-      <div id="youtubeEmbed" style="margin-top: 15px;">
+      <div id="youtubeEmbed">
       </div>
     </div>
   </body>
