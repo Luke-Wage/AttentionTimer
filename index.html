@@ -19,7 +19,7 @@
             $.cookie(this.id, this.value, {path: "/", domain: "luke-wage.github.io"});
         });
         $(document).on('input change', '.range', function() {
-          $(this).next('.rangeLabel').html(this.value);
+          $(this).next().find('.rangeLabel').html(this.value);
         });
         $('#resetSound').click(function(){
           $('#soundLink').val('https://freesound.org/data/previews/91/91926_7037-lq.mp3').change();
@@ -62,7 +62,6 @@
             }
           }
           let space = Math.floor((Math.random() * (max-min)) + min);
-          //console.log(space, elapsed, eventDuration);
           if(elapsed + space < eventDuration) {
             elapsed += space;
           } else {
