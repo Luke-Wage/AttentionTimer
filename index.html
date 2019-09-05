@@ -78,6 +78,7 @@
             clearTimeout(timer);
           }
           player.setSize(300, 150);
+          player.stopVideo();
           $('#youtubeEmbed').css('position','unset').css('top', 'unset').css('left', 'unset');
         }
         player = null;
