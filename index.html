@@ -12,7 +12,7 @@
         $('input').change(function(){
             $.cookie(this.id, this.value, {path: "/", domain: "luke-wage.github.io"});
         });
-        $(document).on('input', '.range', function() {
+        $(document).on('input change', '.range', function() {
           $(this).next('span').html(this.value);
         });
         $('#mainForm').submit(function(event) {
