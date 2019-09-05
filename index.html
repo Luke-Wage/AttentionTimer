@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+      $(function()){
+        $(document).on('input', '.range', function() {
+          $(this).next('span').html(this.value);
+        });
+        $('#mainForm').submit(function(event) {
+          event.preventDefault();
+          elapsed = 0;
+          min = parseFloat($('#min').val());
+          max = parseFloat($('#max').val());
+          eventDuration = parseFloat($('#eventDuration').val());
+          if(max < min) {
+            alert('Duration min must be less than max.')
+          } else {
+            $('#live, #mainForm').toggle();
+            audio = new Audio($('#soundLink').val());
+            advance();
+          }
+        });
+        $('#stop').click(endEvent);
+
+        function advance() {
+          $('#progressBar').css('width', Math.floor(elapsed/eventDuration*100)+'%').html(Math.floor(elapsed * 60) + " / " + Math.floor(eventDuration * 60));
+          if(elapsed >= eventDuration) {
+            $('#youtubeEmbed').html('<iframe src="//www.youtube.com/embed/'+$('#youtubeLink').val()+'?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe>');
+            return;
+          }
+          if (elapsed > 0) {
+            try {
+              audio.load();
+              audio.play();
+            } catch (e) {
+              console.log(e);
+            }
+          }
+          let space = (Math.random() * (max-min)) + min;
+          console.log(space, elapsed, eventDuration);
+          if(elapsed + space < eventDuration) {
+            elapsed += space;
+          } else {
+            space = eventDuration - elapsed;
+            elapsed = eventDuration;
+          }
+
+          timer = setTimeout(advance, space * 60 * 1000);
+        }
+
+        function endEvent() {
+          $('#youtubeEmbed').html('');
+          $('#live, #mainForm').toggle();
+          clearTimeout(timer);
+        }
+      });
+    </script>
+  </head>
+  <body class="bg-light">
+    <div class="container" style="margin-top: 10px;">
+      <form id="mainForm">
+        <div class="col-md-6 mb-3">
+          <label for="eventDuration">Event Duration:</label><br>
+          <input class="form-control range" id="eventDuration" type="range" min=".25" max="20" value="1" step=".25"><span>1</span>
+          Minutes
+        </div>
+        <div class="col-md-6 mb-3">
+          Minutes between sounds:
+          <br>
+          <label for="min">Min</label><input id="min" class="range form-control" type="range" min="0" max="10" step=".25" value=".75"><span>.75</span>
+          <br> Max<input id="max" class="range form-control" type="range" min="0" max="10" step=".25" value="4"><span>4</span>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="soundLink">Sound URL:</label>
+          <br>
+          <input class="form-control" id="soundLink" type="text" required value="https://freesound.org/data/previews/91/91926_7037-lq.mp3">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="youtubeLink">Youtube Video Code:</label>
+          <br>
+          https://www.youtube.com/watch?v=<input class="form-control" id="youtubeLink" type="text" required pattern="[a-zA-Z0-9_-]+" placeholder="e.g. VNgpHTbpNkg">
+        </div>
+        <div class="col-md-6 mb-3">
+          <input class="btn btn-primary btn-lg btn-block" type="submit" value="Go">
+        </div>
+      </form>
+      <div id="live" style="display: none;" class="col-md-6 mb-3">
+      <div class="progress" style="margin-bottom: 20px;">
+        <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+          <input class="btn btn-primary btn-lg btn-block" id="stop" type="button" value="Reset">
+          <div id="youtubeEmbed" style="margin-top: 15px;">
+          </div> 
+      </div>
+    </div>
+  </body>
+</html>
