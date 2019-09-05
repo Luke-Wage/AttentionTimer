@@ -22,9 +22,9 @@
         $('#mainForm').submit(function(event) {
           event.preventDefault();
           elapsed = 0;
-          min = parseFloat($('#min').val());
-          max = parseFloat($('#max').val());
-          eventDuration = parseFloat($('#eventDuration').val());
+          min = Math.floor(60 * parseFloat($('#min').val()));
+          max = Math.floor(60 * parseFloat($('#max').val()));
+          eventDuration = Math.floor(60 * parseFloat($('#eventDuration').val()));
           if(max < min) {
             alert('Duration min must be less than max.')
           } else {
@@ -38,7 +38,7 @@
         $('#stop').click(endEvent);
 
         function advance() {
-          $('#progressBar').css('width', Math.floor(elapsed/eventDuration*100)+'%').html(Math.floor(elapsed * 60) + " / " + Math.floor(eventDuration * 60));
+          $('#progressBar').css('width', Math.floor(elapsed/eventDuration*100)+'%').html(elapsed + " / " + eventDuration);
           if(elapsed >= eventDuration) {
             $('#live').hide();
             $('#youtubeBlock').show()
@@ -56,7 +56,7 @@
               console.log(e);
             }
           }
-          let space = (Math.random() * (max-min)) + min;
+          let space = Math.floor((Math.random() * (max-min)) + min);
           //console.log(space, elapsed, eventDuration);
           if(elapsed + space < eventDuration) {
             elapsed += space;
@@ -65,7 +65,7 @@
             elapsed = eventDuration;
           }
 
-          timer = setTimeout(advance, space * 60 * 1000);
+          timer = setTimeout(advance, space * 1000);
         }
 
         function endEvent() {
