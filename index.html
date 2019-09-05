@@ -37,8 +37,14 @@
             //var iframe = $('<iframe src="//www.youtube.com/embed/'+$('#youtubeLink').val()+'?rel=0&autoplay=1" allow="autoplay; encrypted-media" frameborder="0" allowfullscreen></iframe>');
             //$('#youtubeEmbed').append(iframe);
             //iframe[0].requestFullscreen();
-            window.open('//www.youtube.com/embed/'+$('#youtubeLink').val()+'?rel=0&autoplay=1');
-            return;
+            
+            if((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1){
+              Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube://" + $('#youtubeLink').val()));
+              startActivity(intent);
+            } else {
+              window.open('//www.youtube.com/embed/'+$('#youtubeLink').val()+'?rel=0&autoplay=1');
+              return;
+            }
           }
           if (elapsed > 0) {
             try {
