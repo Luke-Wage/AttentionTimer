@@ -35,29 +35,15 @@
         function advance() {
           $('#progressBar').css('width', Math.floor(elapsed/eventDuration*100)+'%').html(Math.floor(elapsed * 60) + " / " + Math.floor(eventDuration * 60));
           if(elapsed >= eventDuration) {
-            player = new YT.Player('youtubeEmbed', {
-              height: '390',
-              width: '640',
-              videoId: $('#youtubeLink').val(),
-              playerVars: {
-                autoplay: 1,
-                rel: 0
-              },
-              events: {
-                'onReady': function(event){
-                  event.target.playVideo();
-                }
-              }
-            });
             //var iframe = $('<iframe src="//www.youtube.com/embed/'+$('#youtubeLink').val()+'?rel=0&autoplay=1" allow="autoplay; encrypted-media" frameborder="0" allowfullscreen></iframe>');
             //$('#youtubeEmbed').append(iframe);
             //iframe[0].requestFullscreen();
             
-            //if((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)){
-//              window.location = 'intent://'+$('#youtubeLink').val()+'/Intent;scheme=vnd.youtube;package=com.google.android.youtube;S.browser_fallback_url=market://details?id=com.google.android.youtube;end;';
-  //          } else {
-    //          window.open('//www.youtube.com/embed/'+$('#youtubeLink').val()+'?rel=0&autoplay=1');
-      //      }
+            if((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)){
+              window.location = 'intent://'+$('#youtubeLink').val()+'/Intent;scheme=vnd.youtube;package=com.google.android.youtube;S.browser_fallback_url=market://details?id=com.google.android.youtube;end;';
+            } else {
+              window.open('//www.youtube.com/embed/'+$('#youtubeLink').val()+'?rel=0&autoplay=1');
+            }
             return;
           }
           if (elapsed > 0) {
@@ -81,10 +67,23 @@
         }
 
         function endEvent() {
-          $('#youtubeEmbed').empty();
           $('#live, #mainForm').toggle();
           clearTimeout(timer);
         }
+        
+        $('#youtubeLink').change(function(){
+          if(player != null) {
+            player.destroy();
+          }
+          player = new YT.Player('youtubeEmbed', {
+              height: '150',
+              width: '300',
+              videoId: $('#youtubeLink').val(),
+              playerVars: {
+                rel: 0
+              }
+            });
+        });
         
         var all_cookies = $.cookie();
         $.each(all_cookies, function (key, value) {
@@ -126,8 +125,8 @@
         <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
           <input class="btn btn-primary btn-lg btn-block" id="stop" type="button" value="Reset">
-          <div id="youtubeEmbed" style="margin-top: 15px;">
-          </div> 
+      </div>
+      <div id="youtubeEmbed" style="margin-top: 15px;">
       </div>
     </div>
   </body>
