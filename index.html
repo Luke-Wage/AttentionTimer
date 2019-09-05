@@ -127,8 +127,10 @@
       <form id="mainForm">
         <div class="col-md-6 mb-3">
           <label for="eventDuration" class="text-primary">Event Duration:</label><br>
-          <input class="form-control range ml-3" id="eventDuration" type="range" min=".25" max="20" value="1" step=".25"><span>1</span>
-          Minutes
+          <div class="ml-3">
+            <input class="form-control range" id="eventDuration" type="range" min=".25" max="20" value="1" step=".25">
+            <span>1</span> Minutes
+          </div>
         </div>
         <div class="col-md-6 mb-3">
           <span class="text-primary">Minutes between sounds:</span>
