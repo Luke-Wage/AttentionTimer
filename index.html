@@ -39,6 +39,10 @@
               height: '390',
               width: '640',
               videoId: $('#youtubeLink').val(),
+              playerVars: {
+                autoplay: 1,
+                rel: 0
+              },
               events: {
                 'onReady': function(event){
                   event.target.playVideo();
