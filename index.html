@@ -30,7 +30,7 @@
         function advance() {
           $('#progressBar').css('width', Math.floor(elapsed/eventDuration*100)+'%').html(Math.floor(elapsed * 60) + " / " + Math.floor(eventDuration * 60));
           if(elapsed >= eventDuration) {
-            $('#youtubeEmbed').html('<iframe src="//www.youtube.com/embed/'+$('#youtubeLink').val()+'?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe>');
+            $('#youtubeEmbed').html('<iframe src="//www.youtube.com/embed/'+$('#youtubeLink').val()+'?rel=0&autoplay=1" allow="autoplay; encrypted-media" frameborder="0" allowfullscreen></iframe>');
             return;
           }
           if (elapsed > 0) {
@@ -42,7 +42,7 @@
             }
           }
           let space = (Math.random() * (max-min)) + min;
-          console.log(space, elapsed, eventDuration);
+          //console.log(space, elapsed, eventDuration);
           if(elapsed + space < eventDuration) {
             elapsed += space;
           } else {
