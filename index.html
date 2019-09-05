@@ -40,16 +40,8 @@
         function advance() {
           $('#progressBar').css('width', Math.floor(elapsed/eventDuration*100)+'%').html(Math.floor(elapsed * 60) + " / " + Math.floor(eventDuration * 60));
           if(elapsed >= eventDuration) {
-            //var iframe = $('<iframe src="//www.youtube.com/embed/'+$('#youtubeLink').val()+'?rel=0&autoplay=1" allow="autoplay; encrypted-media" frameborder="0" allowfullscreen></iframe>');
-            //$('#youtubeEmbed').append(iframe);
-            //iframe[0].requestFullscreen();
-            
-            //if((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)){
-             // window.location = 'intent://'+$('#youtubeLink').val()+'/Intent;scheme=vnd.youtube;package=com.google.android.youtube;S.browser_fallback_url=market://details?id=com.google.android.youtube;end;';
-            //} else {
-            //  window.open('//www.youtube.com/embed/'+$('#youtubeLink').val()+'?rel=0&autoplay=1');
-            //}
-            $('#youtubeEmbed').show().css('position','fixed').css('top', '0').css('left', '0');
+            $('#youtubeBlock').show()
+            $('#youtubeEmbed').css('position','fixed').css('top', '0').css('left', '0');
             player.seekTo(0);
             player.playVideo();
             player.setSize(window.innerWidth, window.innerHeight);
@@ -87,7 +79,7 @@
         }
         player = null;
         $('#youtubeLink').change(function(){
-          $('#youtubeEmbed').show();
+          $('#youtubeBlock').show();
           if(player != null) {
             player.destroy();
           }
@@ -106,7 +98,7 @@
               events : {
                 'onStateChange' : function(){
                   if(player.getPlayerState() == 0) {
-                    $('#youtubeEmbed').hide();
+                    $('#youtubeBlock').hide();
                     endEvent();
                   } 
                 }
@@ -149,7 +141,7 @@
           https://www.youtube.com/watch?v=<input class="form-control" id="youtubeLink" type="text" required pattern="[a-zA-Z0-9_-]+" placeholder="e.g. VNgpHTbpNkg">
           <br>Once video loads, press play button and then pause to enable autoplay.
         </div>
-        <div class="col-md-6 mb-3">
+        <div class="col-md-6 mb-3" id="youtubeBlock">
           <div id="youtubeEmbed">
           </div>
         </div>
