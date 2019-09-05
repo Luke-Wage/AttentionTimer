@@ -39,7 +39,7 @@
             //iframe[0].requestFullscreen();
             
             if((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)){
-              window.location = 'vnd.youtube://www.youtube.com/watch?v='+$('#youtubeLink').val();
+              window.location = 'intent://'+$('#youtubeLink').val()+'/Intent;scheme=vnd.youtube;package=com.google.android.youtube;S.browser_fallback_url=market://details?id=com.google.android.youtube;end;';
             } else {
               window.open('//www.youtube.com/embed/'+$('#youtubeLink').val()+'?rel=0&autoplay=1');
             }
