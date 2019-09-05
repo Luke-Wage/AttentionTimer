@@ -45,13 +45,10 @@
             //} else {
             //  window.open('//www.youtube.com/embed/'+$('#youtubeLink').val()+'?rel=0&autoplay=1');
             //}
-            $('#youtubeEmbed').show();
+            $('#youtubeEmbed').show().css('position','fixed !important').css('top', '0').css('left', '0');;
             player.seekTo(0);
             player.playVideo();
-            setTimeout(function(){
-                player.setSize(window.insideWidth, window.insideHeight);
-                $('#youtubeEmbed').css('position','fixed !important').css('top', '0').css('left', '0');
-            }, 500);
+            player.setSize(window.innerWidth, window.innerHeight);
             return;
           }
           if (elapsed > 0) {
