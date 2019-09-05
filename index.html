@@ -31,7 +31,7 @@
             $('#live').show();
             $('#mainForm').children().hide();
             audio = new Audio($('#soundLink').val());
-            $('#youtubeEmbed').hide();
+            $('#youtubeBlock').hide();
             advance();
           }
         });
@@ -40,6 +40,7 @@
         function advance() {
           $('#progressBar').css('width', Math.floor(elapsed/eventDuration*100)+'%').html(Math.floor(elapsed * 60) + " / " + Math.floor(eventDuration * 60));
           if(elapsed >= eventDuration) {
+            $('#live').hide();
             $('#youtubeBlock').show()
             $('#youtubeEmbed').css('position','fixed').css('top', '0').css('left', '0');
             player.seekTo(0);
